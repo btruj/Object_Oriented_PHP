@@ -1,7 +1,5 @@
 <?php
-//this declares that we are using strict types
-declare(strict_types=1);
-include "includes/autoloader.inc.php";
+include 'includes/class-autoload.inc.php';
 ?>
 
 <!DOCTYPE html>
@@ -13,48 +11,24 @@ include "includes/autoloader.inc.php";
     <title>Document</title>
 </head>
 <body>
+    <?php 
+     
+// Instantiate the Test class
+$testObj = new Test();
+// Call the setUsersStmt() method of the Test class to insert a new user
+$testObj->setUsersStmt("John", "Doe", "1984-03-02");//saves to database when reload is clicked
 
-            <?php
-                /* Methods
-    By using type declarations, we can throw an error if wrong type is given!
-    Works with:
-            - class/interface namespace
-            - self (used to reference to same class)
-            - array
-            - callable
-            - boolean
-            - float
-            - int
-            - string
-            - iterable
-            - object*/
-            class Person {
-                public $name;
-                public $eyeColor;
-                public $age;
-            
-                //we are enforcing $newName to be a string if not error will show
-                public function setName(string $newName) {
-                    $this->name = $newName;
-            }
+// Instantiate the UsersView class
+$usersObj = new UsersView();
+// Call the showUser() method of the UsersView class to display user information
+$usersObj->showUser("Daniel");
 
-            public function getName() {
-                return $this->name;
-                }
-            }
+// Instantiate the UsersContr class
+$usersObj2 = new UsersContr();
+// Call the createUser() method of the UsersContr class to insert a new user
+$usersObj2->createUser("Jane", "Doe", "1834-05-11");//saves to database when reload is clicked
     
-    $person1 = new Person();
-
-    try {
-        $person1->setName("Bryan");//line 37 ensures we use string-type safety
-        //$person1->setName(2);//error not a string
-        echo $person1->getName();
-    } catch (TypeError $e) {
-        echo "Error: " . $e->getMessage();
-        }
-
-?>
+    ?>
     
 </body>
 </html>
-
